@@ -12,8 +12,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Constructing file paths relative to the manage.py file
         base_dir = settings.BASE_DIR
-        data_csv_path = os.path.join(base_dir, 'data', '/epdata/data/epcons_data.csv')
-        metadata_csv_path = os.path.join(base_dir, 'data', '/epdata/data/epcons_metadata.csv')
+        data_csv_path = os.path.join(settings.BASE_DIR, 'epdata', 'data', 'epcons_data.csv')
+        metadata_csv_path = os.path.join(settings.BASE_DIR, 'epdata', 'data', 'epcons_metadata.csv')
 
         self.stdout.write(self.style.SUCCESS('Clearing existing data...'))
         CountryMetadata.objects.all().delete()  # Delete metadata first due to the FK constraint
@@ -26,7 +26,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS('Data import completed successfully.'))
 
     def parse_country_data(self, csv_file_path):
-        with open(csv_file_path, newline='', encoding='utf-8') as csvfile:
+        with open(csv_file_path, newline='', encoding='ISO-8859-1') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 CountryData.objects.update_or_create(
@@ -58,7 +58,7 @@ class Command(BaseCommand):
                 )
 
     def parse_country_metadata(self, csv_file_path):
-        with open(csv_file_path, newline='', encoding='utf-8') as csvfile:
+        with open(csv_file_path, newline='', encoding='ISO-8859-1') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 try:
