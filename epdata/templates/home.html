@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="py-5 text-center">
+    <h2>Welcome to Your App Name!</h2>
+    <p class="lead">This is a fictional platform where you can explore and "purchase" naming rights to countries based on their environmental performance data. Start by browsing our country list or learn more about how we use data to make the world a better place.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Browse Countries</h4>
+        <p>Discover countries and their environmental data by visiting our <a href="{% url 'list_countries' %}">countries page</a>.</p>
+    </div>
+    <div class="col-md-6">
+        <h4>About This Project</h4>
+        <p>Learn more about the data we use, how to interact with our platform, and the story behind this project.</p>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a href="{% url 'list_countries' %}" class="btn btn-primary">Explore Countries</a>
+</div>
+{% endblock %}

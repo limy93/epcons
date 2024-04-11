@@ -16,7 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth import views as auth_views  # Import Django's built-in auth views
+from epdata import views  # Assuming your views are defined in epdata/views.py
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),  # Home page
+    path('countries/', views.list_countries, name='list_countries'),  # List countries
+    path('countries/<str:country_code>/', views.country_detail, name='country_detail'),  # Country detail
+    path('dashboard/', views.dashboard, name='dashboard'),  # Dashboard
+    
+    # Login and logout URLs using Django's built-in views
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
+    
+    # Add more paths as needed for your application
 ]
