@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="py-5 text-center">
+    <h2>User Dashboard</h2>
+    <p class="lead">Welcome to your dashboard. Here's a quick overview of your activities.</p>
+</div>
+
+<div class="container">
+    {% if user.is_superuser %}
+    <div class="card mb-4">
+        <div class="card-header">Admin Analytics</div>
+        <div class="card-body">
+            <h5 class="card-title">Site Usage Overview</h5>
+            <p class="card-text">Number of active users: {{ active_users_count }}</p>
+            <p class="card-text">Total orders: {{ total_orders_count }}</p>
+            <!-- Include more analytics as required -->
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">Recent Orders</div>
+        <ul class="list-group list-group-flush">
+            {% for order in recent_orders %}
+            <li class="list-group-item">
+                Order #{{ order.id }} by {{ order.user.username }} - Status: {{ order.status }}
+            </li>
+            {% empty %}
+            <li class="list-group-item">No recent orders.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <div class="card mb-4">
+        <div class="card-header">Your Recent Activities</div>
+        <ul class="list-group list-group-flush">
+            {% for purchase in purchases %}
+            <li class="list-group-item">
+                Purchased naming rights for {{ purchase.country.country_name }} on {{ purchase.purchase_date|date:"Y-m-d H:i" }} for ${{ purchase.price }}
+            </li>
+            {% empty %}
+            <li class="list-group-item">No recent activities found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

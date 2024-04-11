@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Select a Country{% endblock %}
+
+{% block content %}
+<div class="py-5 text-center">
+    <h2>Select a Country</h2>
+    <p class="lead">Choose a country from the dropdown list below and click 'View Details' to see more information.</p>
+</div>
+
+<div class="container">
+    <!-- Remove the action attribute if you handle the form submission on the same URL -->
+    <form method="get">
+        <div class="form-group">
+            <label for="country_code">Country:</label>
+            <select name="country_code" id="country_code" class="form-control">
+                <option value="">-- Select a country --</option>
+                {% for country in countries %}
+                <option value="{{ country.country_code }}">{{ country.country_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">View Details</button>
+    </form>
+</div>
+{% endblock %}

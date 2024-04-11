@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{{ country.country_name }} Details{% endblock %}
+
+{% block content %}
+<div class="py-5 text-center">
+    <h2>{{ country.country_name }} Details</h2>
+    <p class="lead">Below you will find detailed environmental performance data and additional metadata about {{ country.country_name }}.</p>
+</div>
+
+<div class="container">
+    <div class="card mb-4">
+        <div class="card-header">
+            Basic Information
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ country.country_name }}</h5>
+            <p class="card-text">Country Code: {{ country.country_code }}</p>
+            <p class="card-text">Region: {{ metadata.region }}</p>
+            <p class="card-text">Currency Unit: {{ metadata.currency_unit }}</p>
+            <p class="card-text">Income Group: {{ metadata.income_group }}</p>
+            <p class="card-text">Special Notes: {{ metadata.special_notes }}</p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            Environmental Performance Data (Yearly)
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for year, ep_data in country.get_ep_data.items %}
+            <li class="list-group-item">
+                <strong>{{ year }}:</strong> {{ ep_data }}
+            </li>
+            {% empty %}
+            <li class="list-group-item">No environmental performance data available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <!-- Buttons for actions -->
+    <div class="text-center mb-4">
+        <!-- Purchase Button -->
+        <a href="{% url 'purchase' country.country_code %}" class="btn btn-primary">Purchase Naming Rights</a>
+        <!-- Back to List Button -->
+        <a href="{% url 'list_countries' %}" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+{% endblock %}

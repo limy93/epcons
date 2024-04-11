@@ -17,18 +17,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views  # Import Django's built-in auth views
-from epdata import views  # Assuming your views are defined in epdata/views.py
+from epdata.views import (home, list_countries, country_detail, dashboard,
+                          register, user_logout, purchase_view, confirm_purchase)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),  # Home page
-    path('countries/', views.list_countries, name='list_countries'),  # List countries
-    path('countries/<str:country_code>/', views.country_detail, name='country_detail'),  # Country detail
-    path('dashboard/', views.dashboard, name='dashboard'),  # Dashboard
-    
+    path('', home, name='home'),  # Home page
+    path('countries/', list_countries, name='list_countries'),  # List countries
+    path('countries/<str:country_code>/', country_detail, name='country_detail'),  # Country detail
+    path('dashboard/', dashboard, name='dashboard'),  # Dashboard
+    path('register/', register, name='register'),  # Registration page
+    path('purchase/<str:country_code>/', purchase_view, name='purchase'),  # Purchase page
+    path('confirm_purchase/<str:country_code>/', confirm_purchase, name='confirm_purchase'),  # Confirm purchase
+
     # Login and logout URLs using Django's built-in views
-    path('login/', auth_views.LoginView.as_view(), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
-    
-    # Add more paths as needed for your application
+    path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),  # Custom template for login under 'accounts/login/'
+    path('logout/', user_logout, name='logout'),  # Custom logout view that redirects to home page
+
+    # Additional paths might be added below as needed.
 ]
