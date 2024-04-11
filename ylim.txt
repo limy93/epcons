@@ -1,0 +1,9 @@
+11 April 2024
+- deleted empty/non-related columns, renamed columns (ensure consistency)
+- organized data and splitted to 2 csv files 'epcons_data' and 'epcons_metadata', added both to epdata/data
+- created repository 'epcons'
+- created project 'epcons', app 'epdata'
+- updated epcons/settings.py
+- created importcsvdata.py and __init__.py under epdata/management/commands
+- created __init__.py under epdata/management
+- updated epdata/models.py
