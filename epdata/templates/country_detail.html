@@ -5,7 +5,7 @@
 {% block content %}
 <div class="py-5 text-center">
     <h2>{{ country.country_name }} Details</h2>
-    <p class="lead">Below you will find detailed environmental performance data and additional metadata about {{ country.country_name }}.</p>
+    <p class="lead">Below you will find detailed electric power consumption data and additional metadata about {{ country.country_name }}.</p>
 </div>
 
 <div class="container">
@@ -27,9 +27,15 @@
 
     <div class="card mb-4">
         <div class="card-header">
-            Environmental Performance Data (Yearly)
+            Electric Power Consumption (kWh per Capita, Yearly)
         </div>
-        <canvas id="environmentalDataChart" width="400" height="200"></canvas>
+        {% if data %}
+        <canvas id="electricConsumptionChart" width="400" height="200"></canvas>
+        {% else %}
+        <div class="card-body">
+            <p>No electric power consumption data available.</p>
+        </div>
+        {% endif %}
     </div>
     
     <!-- Buttons for actions -->
@@ -41,32 +47,44 @@
     </div>
 </div>
 
+{% if data %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var ctx = document.getElementById('environmentalDataChart').getContext('2d');
-        var environmentalDataChart = new Chart(ctx, {
+        var ctx = document.getElementById('electricConsumptionChart').getContext('2d');
+        var electricConsumptionChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: {{ years|safe }},
                 datasets: [{
-                    label: 'Environmental Performance Data',
+                    label: 'Electric Power Consumption from 1994 to 2014 (kWh per Capita)',
                     data: {{ data|safe }},
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 }]
             },
             options: {
                 scales: {
                     y: {
+                        title: {
+                            display: true,
+                            text: 'Electric Power Consumption (kWh per Capita)'
+                        },
                         beginAtZero: true
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Year'
+                        }
                     }
                 }
             }
         });
     });
 </script>
+{% endif %}
 
 {% block additional_styles %}
 <style>
