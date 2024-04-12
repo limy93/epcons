@@ -9,12 +9,16 @@
 </div>
 
 <div class="container">
-    <!-- Display messages from Django's messaging framework -->
+    <!-- Display messages from Django's messaging framework, centered -->
     {% if messages %}
-    <div class="alert alert-info" role="alert">
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="alert alert-info text-center" role="alert">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        </div>
     </div>
     {% endif %}
 

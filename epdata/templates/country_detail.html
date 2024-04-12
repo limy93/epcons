@@ -16,10 +16,12 @@
         <div class="card-body">
             <h5 class="card-title">{{ country.country_name }}</h5>
             <p class="card-text">Country Code: {{ country.country_code }}</p>
-            <p class="card-text">Region: {{ metadata.region }}</p>
-            <p class="card-text">Currency Unit: {{ metadata.currency_unit }}</p>
-            <p class="card-text">Income Group: {{ metadata.income_group }}</p>
-            <p class="card-text">Special Notes: {{ metadata.special_notes }}</p>
+            <p class="card-text">Long Name: {{ country.metadata.long_name }}</p>
+            <p class="card-text">Region: {{ country.metadata.region }}</p>
+            <p class="card-text">Currency Unit: {{ country.metadata.currency_unit }}</p>
+            <p class="card-text">Income Group: {{ country.metadata.income_group }}</p>
+            <p class="card-text">Special Notes: {{ country.metadata.special_notes }}</p>
+            <p class="card-text price-highlight"><strong>Naming Rights Price: ${{ country.price }}</strong></p>
         </div>
     </div>
 
@@ -27,15 +29,7 @@
         <div class="card-header">
             Environmental Performance Data (Yearly)
         </div>
-        <ul class="list-group list-group-flush">
-            {% for year, ep_data in country.get_ep_data.items %}
-            <li class="list-group-item">
-                <strong>{{ year }}:</strong> {{ ep_data }}
-            </li>
-            {% empty %}
-            <li class="list-group-item">No environmental performance data available.</li>
-            {% endfor %}
-        </ul>
+        <canvas id="environmentalDataChart" width="400" height="200"></canvas>
     </div>
     
     <!-- Buttons for actions -->
@@ -46,4 +40,46 @@
         <a href="{% url 'list_countries' %}" class="btn btn-secondary">Back to List</a>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('environmentalDataChart').getContext('2d');
+        var environmentalDataChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ years|safe }},
+                datasets: [{
+                    label: 'Environmental Performance Data',
+                    data: {{ data|safe }},
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+{% block additional_styles %}
+<style>
+    .price-highlight {
+        color: #dc3545; /* Bootstrap danger color for visibility */
+        font-size: 1.25rem; /* Larger font size */
+        font-weight: bold; /* Bold font weight */
+        background-color: #fff3cd; /* Light yellow background for emphasis */
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ffeeba; /* Light yellow border for more emphasis */
+    }
+</style>
+{% endblock %}
+
 {% endblock %}
