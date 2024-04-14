@@ -15,24 +15,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, reverse_lazy
-from django.contrib.auth import views as auth_views
-from epdata.views import (home, list_countries, country_detail, dashboard,
-                          register, user_logout, purchase_view, confirm_purchase)
+from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),
-    path('countries/', list_countries, name='list_countries'),
-    path('countries/<str:country_code>/', country_detail, name='country_detail'),
-    path('dashboard/', dashboard, name='dashboard'),
-    path('register/', register, name='register'),
-    path('purchase/<str:country_code>/', purchase_view, name='purchase'),
-    path('confirm_purchase/<str:country_code>/', confirm_purchase, name='confirm_purchase'),
-
-    path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('accounts/logout/', auth_views.LogoutView.as_view(next_page=reverse_lazy('home')), name='logout'),
+    path('', include('epdata.urls')),
 ]
-
-# Optional: Define a namespace
-app_name = 'epdata'

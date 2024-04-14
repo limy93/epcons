@@ -4,22 +4,22 @@
 
 {% block content %}
 <div class="py-5 text-center">
-    <h2>Welcome to Your App Name!</h2>
+    <h2>Welcome to Power Horizons!</h2>
     <p class="lead">This is a fictional platform where you can explore and 'purchase' naming rights to countries based on their electric power consumption data. Start by browsing our list of countries or learn more about how we use data to make the world a better place.</p>
 </div>
 
 <div class="row">
     <div class="col-md-6">
         <h4>Browse Countries</h4>
-        <p>Discover countries and their electric power consumption by visiting our <a href="{% url 'list_countries' %}">countries page</a>.</p>
+        <p>Discover countries and their electric power consumption by visiting our countries page.</p>
+        <!-- Relocated the Explore Countries button to align with the Browse Countries section -->
+        <a href="{% url 'list_countries' %}" class="btn btn-primary">Explore Countries</a>
     </div>
     <div class="col-md-6">
         <h4>About This Project</h4>
         <p>Learn more about the data we use, how to interact with our platform, and the story behind this project.</p>
+        <!-- Added an About button under the About the Project section -->
+        <a href="{% url 'about' %}" class="btn btn-primary">About</a>
     </div>
-</div>
-
-<div class="text-center mt-4">
-    <a href="{% url 'list_countries' %}" class="btn btn-primary">Explore Countries</a>
 </div>
 {% endblock %}

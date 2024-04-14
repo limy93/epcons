@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}{{ user.username|default:"User" }}'s Dashboard{% endblock %}
 
 {% block content %}
-<div class="py-5 text-center">
-    <h2>User Dashboard</h2>
-    <p class="lead">Welcome to your dashboard. Here's a quick overview of your activities.</p>
+<div class="py-5 text-center" id="dashboard-content">
+    <h2>{{ user.username|default:"User" }}'s Dashboard</h2>
+    <p class="lead">Welcome to your personalized dashboard, {{ user.username|default:"User" }}. Here's a quick overview of your activities.</p>
 </div>
 
 <div class="container">

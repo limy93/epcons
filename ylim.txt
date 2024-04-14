@@ -7,3 +7,21 @@
 - created importcsvdata.py and __init__.py under epdata/management/commands
 - created __init__.py under epdata/management
 - updated epdata/models.py
+- amended importcsvdata.py (encoding='ISO-8859-1')
+- imported data successfully
+
+12 April 2024
+- created and updated base.html, home.html, list_countries.html, country_detail.html, dashboard.html, login.html, logout.html, purchase.html, registration.html
+- updated views.py, urls.py, settings.py, models.py, importcsvdata.py and admin.py
+- created forms.py
+- created about.html, updated home.html, views.py, urls.py, base.html
+
+13 April 2024
+- updated dashboard.html
+
+14 April 2024
+- created behave and Django Tests
+
+15 April 2024
+- To continue behave tests, any amendment, one page report, readme file
+- To upload to Codio, deploy etc

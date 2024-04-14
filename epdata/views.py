@@ -31,8 +31,12 @@ def country_detail(request, country_code):
         'country': country,
         'years': years,
         'data': data,
-        'metadata': country.metadata  # Ensure metadata is passed if used in the template
+        'metadata': country.metadata
     })
+
+def about(request):
+    """Render the about page."""
+    return render(request, 'about.html')
 
 def login_required_message(function):
     """Decorator to display a message if the user is not authenticated."""
@@ -67,7 +71,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # Automatically log in the new user
-            return redirect('home')
+            return redirect('dashboard')
     else:
         form = RegisterForm()
     return render(request, 'registration.html', {'form': form})
