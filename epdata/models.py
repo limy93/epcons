@@ -30,9 +30,10 @@ class CountryMetadata(models.Model):
 
 class Purchase(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='purchases')
-    country = models.ForeignKey(CountryData, on_delete=models.CASCADE, related_name='purchases')
-    price = models.DecimalField(max_digits=8, decimal_places=2)
+    country = models.ForeignKey(CountryData, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     purchase_date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=100, default='Pending')  # Ensure this field exists
 
     def __str__(self):
         return f'{self.user.username} purchased naming rights for {self.country.country_name} for ${self.price}'

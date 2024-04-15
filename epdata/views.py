@@ -54,10 +54,12 @@ def dashboard(request):
     if request.user.is_superuser:
         active_users_count = User.objects.filter(is_active=True).count()
         total_orders_count = Purchase.objects.count()
-        recent_orders = Purchase.objects.all().order_by('-purchase_date')[:10]
+        active_users = User.objects.filter(is_active=True).order_by('-date_joined')  # Assuming you want the newest users first
+        recent_orders = Purchase.objects.all().order_by('-purchase_date')
         return render(request, 'dashboard.html', {
             'active_users_count': active_users_count,
             'total_orders_count': total_orders_count,
+            'active_users': active_users,
             'recent_orders': recent_orders
         })
     else:
