@@ -9,7 +9,7 @@ def step_impl(context):
 @when('I enter valid credentials')
 def step_impl(context):
     context.browser.find_element(By.ID, "id_username").send_keys("default_user")
-    context.browser.find_element(By.ID, "id_password").send_keys("defaultpassword")
+    context.browser.find_element(By.ID, "id_password").send_keys("valid_password")
 
 @when('I enter invalid credentials')
 def step_impl(context):

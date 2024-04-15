@@ -26,11 +26,11 @@
     </div>
 
     <div class="card mb-4">
-        <div class="card-header">
-            Electric Power Consumption (kWh per Capita, Yearly)
-        </div>
         {% if data %}
-        <canvas id="electricConsumptionChart" width="400" height="200"></canvas>
+        <h4 style="text-align:center; padding-top: 20px;">Electric Power Consumption from 1994 to 2014 (kWh per Capita)</h4>
+        <div style="position: relative; height:400px; width:100%;">
+            <canvas id="electricConsumptionChart"></canvas>
+        </div>
         {% else %}
         <div class="card-body">
             <p>No electric power consumption data available.</p>
@@ -57,7 +57,7 @@
             data: {
                 labels: {{ years|safe }},
                 datasets: [{
-                    label: 'Electric Power Consumption from 1994 to 2014 (kWh per Capita)',
+                    label: 'Electric Power Consumption (kWh per Capita, Yearly)', // Removed label here; title is separately handled above the chart
                     data: {{ data|safe }},
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
@@ -65,18 +65,34 @@
                 }]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 30, // Adjusted left padding for better visibility of Y-axis text
+                        right: 20
+                    }
+                },
                 scales: {
                     y: {
                         title: {
                             display: true,
-                            text: 'Electric Power Consumption (kWh per Capita)'
+                            text: 'Electric Power Consumption (kWh per Capita)',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            padding: 10
                         },
                         beginAtZero: true
                     },
                     x: {
                         title: {
                             display: true,
-                            text: 'Year'
+                            text: 'Year',
+                            font: {
+                                size: 14
+                            }
                         }
                     }
                 }
