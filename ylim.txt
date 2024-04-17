@@ -23,5 +23,8 @@
 - created behave and Django Tests
 
 15 April 2024
-- To continue behave tests, any amendment, one page report, readme file
-- To upload to Codio, deploy etc
+- Created python and behave tests
+
+17 April 2024
+- Editted
+- Updated registration.html to have show password option
