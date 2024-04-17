@@ -20,11 +20,19 @@
 - updated dashboard.html
 
 14 April 2024
-- created behave and Django Tests
+- created Behave and Django Tests
 
 15 April 2024
-- Created python and behave tests
+- Updated Behave and Django Tests
 
 17 April 2024
 - Editted
 - Updated registration.html to have show password option
+- Added password reset function
+- Updated test_views.py
+
+18 April 2024
+- To add behave test, amend page content
+
+19 April 2024
+- To deploy, upload to Codio
