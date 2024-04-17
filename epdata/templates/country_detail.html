@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ country.country_name }} Details{% endblock %}
+{% block title %}{{ country.country_name }} Details {% endblock %}
 
 {% block content %}
 <div class="py-5 text-center">
@@ -40,9 +40,9 @@
     
     <!-- Buttons for actions -->
     <div class="text-center mb-4">
-        <!-- Purchase Button -->
+        <!-- Purchase button -->
         <a href="{% url 'purchase' country.country_code %}" class="btn btn-primary">Purchase Naming Rights</a>
-        <!-- Back to List Button -->
+        <!-- Back to List button -->
         <a href="{% url 'list_countries' %}" class="btn btn-secondary">Back to List</a>
     </div>
 </div>
@@ -57,7 +57,7 @@
             data: {
                 labels: {{ years|safe }},
                 datasets: [{
-                    label: 'Electric Power Consumption (kWh per Capita, Yearly)', // Removed label here; title is separately handled above the chart
+                    label: 'Electric Power Consumption (kWh per Capita, Yearly)',
                     data: {{ data|safe }},
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
@@ -69,7 +69,7 @@
                 maintainAspectRatio: false,
                 layout: {
                     padding: {
-                        left: 30, // Adjusted left padding for better visibility of Y-axis text
+                        left: 30,
                         right: 20
                     }
                 },
@@ -105,14 +105,13 @@
 {% block additional_styles %}
 <style>
     .price-highlight {
-        color: #dc3545; /* Bootstrap danger color for visibility */
-        font-size: 1.25rem; /* Larger font size */
-        font-weight: bold; /* Bold font weight */
-        background-color: #fff3cd; /* Light yellow background for emphasis */
+        color: #dc3545;
+        font-size: 1.25rem;
+        font-weight: bold;
+        background-color: #fff3cd;
         padding: 10px;
         border-radius: 5px;
-        border: 1px solid #ffeeba; /* Light yellow border for more emphasis */
-    }
+        border: 1px solid #ffeeba;
 </style>
 {% endblock %}
 

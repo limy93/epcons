@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 @given('I am on the home page')
 def step_impl(context):
-    context.browser.get('http://127.0.0.1:8000/')  # Make sure this URL is correct for your local dev environment
+    context.browser.get('http://127.0.0.1:8000/')   # Make sure this URL is correct for the local development environment
 
 @when('I click on the "About" button')
 def step_impl(context):
@@ -25,4 +25,4 @@ def step_impl(context):
 
 @then('I should be redirected to the Explore Countries page')
 def step_impl(context):
-    assert "Select a Country" in context.browser.title  # Adjust this title to match your countries list page title
+    assert "Select a Country" in context.browser.title   # Adjust this title to match the countries list page title

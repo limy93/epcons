@@ -1,10 +1,10 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 class CountryData(models.Model):
     country_code = models.CharField(max_length=3, primary_key=True)
     country_name = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=100.00)  # Default price for naming rights
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=100.00)   # Default price for naming rights
 
     def __str__(self):
         return self.country_name
@@ -12,7 +12,7 @@ class CountryData(models.Model):
 class ElectricConsumption(models.Model):
     country = models.ForeignKey(CountryData, on_delete=models.CASCADE, related_name='electric_consumptions')
     year = models.IntegerField()
-    consumption = models.FloatField(null=True, blank=True)  # Allows null for years with no data
+    consumption = models.FloatField(null=True, blank=True)   # Allows null for years with no data
 
     def __str__(self):
         return f"{self.country.country_name} {self.year} Consumption"
@@ -33,7 +33,7 @@ class Purchase(models.Model):
     country = models.ForeignKey(CountryData, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     purchase_date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=100, default='Pending')  # Ensure this field exists
+    status = models.CharField(max_length=100, default='Pending')   # Ensure this field exists
 
     def __str__(self):
         return f'{self.user.username} purchased naming rights for {self.country.country_name} for ${self.price}'

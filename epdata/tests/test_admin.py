@@ -1,9 +1,7 @@
-from django.test import TestCase
+from django.contrib.admin import ModelAdmin
 from django.contrib.admin.sites import AdminSite
 from django.contrib.auth.models import User
-from django.contrib.admin import ModelAdmin
-
-# Adjust these imports according to the actual path
+from django.test import TestCase
 from epdata.admin import CountryDataAdmin, CountryMetadataAdmin, ElectricConsumptionAdmin, PurchaseAdmin
 from epdata.models import CountryData, CountryMetadata, ElectricConsumption, Purchase
 
@@ -18,7 +16,7 @@ class AdminTest(TestCase):
 
     def test_CountryDataAdmin(self):
         admin = CountryDataAdmin(CountryData, self.site)
-        self.assertIsInstance(admin, ModelAdmin)  # Basic test to confirm admin interface setup
+        self.assertIsInstance(admin, ModelAdmin)   # Basic test to confirm admin interface setup
 
     def test_CountryMetadataAdmin(self):
         admin = CountryMetadataAdmin(CountryMetadata, self.site)

@@ -1,12 +1,12 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
-from django.conf import settings
+from django.shortcuts import get_object_or_404, redirect, render
+from .forms import RegisterForm
 from .models import CountryData, CountryMetadata, ElectricConsumption, Purchase
-from .forms import RegisterForm  # Assuming you have a custom registration form
 
 def home(request):
     """Render the home page."""
@@ -54,7 +54,7 @@ def dashboard(request):
     if request.user.is_superuser:
         active_users_count = User.objects.filter(is_active=True).count()
         total_orders_count = Purchase.objects.count()
-        active_users = User.objects.filter(is_active=True).order_by('-date_joined')  # Assuming you want the newest users first
+        active_users = User.objects.filter(is_active=True).order_by('-date_joined')   # Show the newest users first
         recent_orders = Purchase.objects.all().order_by('-purchase_date')
         return render(request, 'dashboard.html', {
             'active_users_count': active_users_count,
@@ -72,7 +72,7 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # Automatically log in the new user
+            login(request, user)   # Automatically log in the new user
             return redirect('dashboard')
     else:
         form = RegisterForm()
@@ -91,7 +91,7 @@ def purchase_view(request, country_code):
         purchase = Purchase(
             user=request.user,
             country=country,
-            price=country.price  # Use the dynamic price
+            price=country.price   # Use the dynamic price
         )
         purchase.save()
         return redirect('dashboard')
@@ -105,7 +105,7 @@ def confirm_purchase(request, country_code):
         purchase = Purchase(
             user=request.user,
             country=country,
-            price=country.price  # Use the secure price from the database
+            price=country.price   # Use the secure price from the database
         )
         purchase.save()
         return redirect('dashboard')

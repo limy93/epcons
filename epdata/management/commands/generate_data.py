@@ -1,15 +1,15 @@
-from django.core.management.base import BaseCommand
-from faker import Faker
-from django.contrib.auth.models import User
-from epdata.models import CountryData, Purchase
 import random
+from django.contrib.auth.models import User
+from django.core.management.base import BaseCommand
+from epdata.models import CountryData, Purchase
+from faker import Faker
 
 class Command(BaseCommand):
     help = 'Generate fake data for users and purchases'
 
     def add_arguments(self, parser):
-        parser.add_argument('--users', type=int, help='Number of fake users to create')
-        parser.add_argument('--purchases', type=int, help='Number of fake purchases to create')
+        parser.add_argument('--users', type=int, help='Number of fake users to be created')
+        parser.add_argument('--purchases', type=int, help='Number of fake purchases to be created')
 
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS('Starting to generate fake data...'))
@@ -23,7 +23,7 @@ class Command(BaseCommand):
             username = fake.user_name()
             email = fake.email()
             user = User.objects.create_user(username=username, email=email, password='testpass123')
-            self.stdout.write(self.style.SUCCESS(f'Created user {username}'))
+            self.stdout.write(self.style.SUCCESS(f'Created user: {username}'))
 
     def create_purchases(self, fake, number):
         users = list(User.objects.all())

@@ -1,8 +1,8 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth.models import User
-from epdata.models import CountryData, CountryMetadata, ElectricConsumption, Purchase
 from django.utils import timezone
+from epdata.models import CountryData, CountryMetadata, ElectricConsumption, Purchase
 
 class ViewTestCase(TestCase):
     def setUp(self):

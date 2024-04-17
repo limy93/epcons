@@ -31,7 +31,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'rosepublic-georgetalent-8000.codio-box.uk']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -74,11 +73,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'epcons.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# Database configuration for testing
 if 'test' in os.sys.argv:
     DATABASES = {
         'default': {
@@ -112,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -123,7 +119,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/

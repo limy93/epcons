@@ -1,8 +1,8 @@
-from django.test import TestCase
-from django.contrib.auth.models import User
-from django.utils import timezone
-from epdata.models import CountryData, ElectricConsumption, CountryMetadata, Purchase
 from decimal import Decimal
+from django.contrib.auth.models import User
+from django.test import TestCase
+from django.utils import timezone
+from epdata.models import CountryData, CountryMetadata, ElectricConsumption, Purchase
 
 class CountryDataModelTest(TestCase):
     def setUp(self):
