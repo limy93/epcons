@@ -32,7 +32,8 @@
 - Updated test_views.py
 
 18 April 2024
-- To add behave test, amend page content
+- Added password reset and registration behave tests
+- To amend page content
 
 19 April 2024
 - To deploy, upload to Codio
